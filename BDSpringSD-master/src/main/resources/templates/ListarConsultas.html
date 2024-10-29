@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Consultas</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Lista de Consultas</h2>
+    <div class="mb-3">
+        <a href="/consultas/crear" class="btn btn-primary">Agregar Nueva Consulta</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Mascota</th>
+            <th>Veterinario</th>
+            <th>Fecha de Consulta</th>
+            <th>Motivo</th>
+            <th>Diagnóstico</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consulta : ${consultas}">
+            <td th:text="${consulta.id}"></td>
+            <td th:text="${consulta.mascota.nombre}"></td>
+            <td th:text="${consulta.veterinario.nombre}"></td>
+            <td th:text="${#dates.format(consulta.fechaConsulta, 'dd/MM/yyyy')}"></td>
+            <td th:text="${consulta.motivo}"></td>
+            <td th:text="${consulta.diagnostico}"></td>
+            <td>
+                <a th:href="@{/consultas/editar/{id}(id=${consulta.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/consultas/eliminar/{id}(id=${consulta.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

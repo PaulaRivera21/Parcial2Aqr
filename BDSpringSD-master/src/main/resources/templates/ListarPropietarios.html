@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Propietarios</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Lista de Propietarios</h2>
+    <div class="mb-3">
+        <a href="/propietarios/crear" class="btn btn-primary">Agregar Nuevo Propietario</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="propietario : ${propietarios}">
+            <td th:text="${propietario.id}"></td>
+            <td th:text="${propietario.nombre}"></td>
+            <td th:text="${propietario.telefono}"></td>
+            <td th:text="${propietario.direccion}"></td>
+            <td>
+                <a th:href="@{/propietarios/listar/editar/{id}(id=${propietario.id})}" class="btn btn-warning">Editar</a>
+                <a th:href="@{/propietarios/listar/eliminar/{id}(id=${propietario.id})}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este propietario?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
